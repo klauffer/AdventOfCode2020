@@ -3,7 +3,7 @@ using System.Linq;
 using PuzzleSolutions.Day2;
 using Xunit;
 
-namespace PuzzleSolutionsTests.Puzzle2
+namespace PuzzleSolutionsTests.Day2
 {
     public class InputAdapterShould
     {
