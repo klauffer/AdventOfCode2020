@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace PuzzleSolutions.Day2
 {
-    public class Question1Policy : PasswordPhilosophy
+    public sealed class Question1Policy : PasswordPhilosophy
     {
         public Question1Policy(IEnumerable<string> inputs) : base(inputs)
         {
