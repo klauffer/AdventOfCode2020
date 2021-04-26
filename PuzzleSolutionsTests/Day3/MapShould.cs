@@ -23,6 +23,22 @@ namespace PuzzleSolutionsTests.Day3
         }
 
         [Fact]
+        public void Get_Correct_MapCoordinateType_Using_Coordinate()
+        {
+            var mapCoordinates = new HashSet<MapCoordinate>()
+            {
+                new MapCoordinate(new Coordinate(0,0), MapCoordinateType.Empty),
+                new MapCoordinate(new Coordinate(0,1), MapCoordinateType.Empty),
+                new MapCoordinate(new Coordinate(1,0), MapCoordinateType.Empty),
+                new MapCoordinate(new Coordinate(1,1), MapCoordinateType.Tree)
+            };
+
+            var map = new Map(mapCoordinates);
+
+            Assert.Equal(MapCoordinateType.Tree, map.GetCoordinateType(new Coordinate(1, 1)));
+        }
+
+        [Fact]
         public void Inform_If_Out_Of_X_Bounds()
         {
             var mapCoordinates = new HashSet<MapCoordinate>()

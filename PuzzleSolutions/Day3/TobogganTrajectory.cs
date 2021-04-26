@@ -11,7 +11,7 @@ namespace PuzzleSolutions.Day3
         private readonly Map _map;
         private readonly Traveler _traveler;
 
-        private TobogganTrajectory(Map map, Traveler traveler)
+        public TobogganTrajectory(Map map, Traveler traveler)
         {
             _map = map;
             _traveler = traveler;
@@ -22,12 +22,22 @@ namespace PuzzleSolutions.Day3
         //    var map = new Map()
         //}
 
-        //public int GetNumberOfTreesInPath()
-        //{
-        //    do
-        //    {
+        public int GetNumberOfTreesInPath()
+        {
+            var result = 0;
+            var mapCoordinateType = MapCoordinateType.Empty;
+            var newCoordinate = new Coordinate(0, 0);
+            do
+            {
+                newCoordinate = _traveler.Move(3,1);
+                mapCoordinateType = _map.GetCoordinateType(newCoordinate);
+                if (mapCoordinateType == MapCoordinateType.Tree)
+                {
+                    result++;
+                }
+            } while (mapCoordinateType != MapCoordinateType.OutOfBoundsY);
 
-        //    } while (_map.);
-        //}
+            return result;
+        }
     }
 }

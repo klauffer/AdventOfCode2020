@@ -27,6 +27,9 @@ namespace PuzzleSolutions.Day3
             };
         }
 
+        internal MapCoordinateType GetCoordinateType(Coordinate coordinate) => 
+            GetCoordinateType(coordinate.X, coordinate.Y);
+
         private int GetMaxXCoordinate() => _coordinates.Select(mapCoordinate => mapCoordinate.Coordinate.X).Max();
         private int GetMaxYCoordinate() => _coordinates.Select(mapCoordinate => mapCoordinate.Coordinate.Y).Max();
     }
