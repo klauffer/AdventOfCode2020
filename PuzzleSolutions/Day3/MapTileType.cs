@@ -1,6 +1,6 @@
 ﻿namespace PuzzleSolutions.Day3
 {
-    internal enum MapCoordinateType
+    internal enum MapTileType
     {
         Empty,
         Tree,

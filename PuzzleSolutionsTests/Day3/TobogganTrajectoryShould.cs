@@ -13,36 +13,35 @@ namespace PuzzleSolutionsTests.Day3
         [Fact]
         public void Find_The_Correct_Number_Of_Trees_In_Path()
         {
-            var mapCoordinates = new HashSet<MapCoordinate>()
+            var mapCoordinates = new HashSet<MapTile>()
             {
-                new MapCoordinate(new Coordinate(0,0), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(1,0), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(2,0), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(3,0), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(4,0), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(5,0), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(6,0), MapCoordinateType.Empty),
+                new MapTile(new Coordinate(0,0), MapTileType.Empty),
+                new MapTile(new Coordinate(1,0), MapTileType.Empty),
+                new MapTile(new Coordinate(2,0), MapTileType.Empty),
+                new MapTile(new Coordinate(3,0), MapTileType.Empty),
+                new MapTile(new Coordinate(4,0), MapTileType.Empty),
+                new MapTile(new Coordinate(5,0), MapTileType.Empty),
+                new MapTile(new Coordinate(6,0), MapTileType.Empty),
 
-                new MapCoordinate(new Coordinate(0,1), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(1,1), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(2,1), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(3,1), MapCoordinateType.Tree),//should find
-                new MapCoordinate(new Coordinate(4,1), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(5,1), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(6,1), MapCoordinateType.Empty),
+                new MapTile(new Coordinate(0,1), MapTileType.Empty),
+                new MapTile(new Coordinate(1,1), MapTileType.Empty),
+                new MapTile(new Coordinate(2,1), MapTileType.Empty),
+                new MapTile(new Coordinate(3,1), MapTileType.Tree),//should find
+                new MapTile(new Coordinate(4,1), MapTileType.Empty),
+                new MapTile(new Coordinate(5,1), MapTileType.Empty),
+                new MapTile(new Coordinate(6,1), MapTileType.Empty),
 
-                new MapCoordinate(new Coordinate(0,2), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(1,2), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(2,2), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(3,2), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(4,2), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(5,2), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(6,2), MapCoordinateType.Tree),//should find
+                new MapTile(new Coordinate(0,2), MapTileType.Empty),
+                new MapTile(new Coordinate(1,2), MapTileType.Empty),
+                new MapTile(new Coordinate(2,2), MapTileType.Empty),
+                new MapTile(new Coordinate(3,2), MapTileType.Empty),
+                new MapTile(new Coordinate(4,2), MapTileType.Empty),
+                new MapTile(new Coordinate(5,2), MapTileType.Empty),
+                new MapTile(new Coordinate(6,2), MapTileType.Tree),//should find
 
             };
             var map = new Map(mapCoordinates);
-            var traveler = new Traveler(0, 0);
-            var tobogganTrajectory = new TobogganTrajectory(map, traveler);
+            var tobogganTrajectory = new TobogganTrajectory(map);
 
             var numberOfTrees = tobogganTrajectory.GetNumberOfTreesInPath();
 
@@ -52,40 +51,85 @@ namespace PuzzleSolutionsTests.Day3
         [Fact]
         public void Not_Find_Trees_Out_Of_Path()
         {
-            var mapCoordinates = new HashSet<MapCoordinate>()
+            var mapCoordinates = new HashSet<MapTile>()
             {
-                new MapCoordinate(new Coordinate(0,0), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(1,0), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(2,0), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(3,0), MapCoordinateType.Tree),//should not find
-                new MapCoordinate(new Coordinate(4,0), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(5,0), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(6,0), MapCoordinateType.Empty),
+                new MapTile(new Coordinate(0,0), MapTileType.Empty),
+                new MapTile(new Coordinate(1,0), MapTileType.Empty),
+                new MapTile(new Coordinate(2,0), MapTileType.Empty),
+                new MapTile(new Coordinate(3,0), MapTileType.Tree),//should not find
+                new MapTile(new Coordinate(4,0), MapTileType.Empty),
+                new MapTile(new Coordinate(5,0), MapTileType.Empty),
+                new MapTile(new Coordinate(6,0), MapTileType.Empty),
 
-                new MapCoordinate(new Coordinate(0,1), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(1,1), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(2,1), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(3,1), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(4,1), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(5,1), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(6,1), MapCoordinateType.Empty),
+                new MapTile(new Coordinate(0,1), MapTileType.Empty),
+                new MapTile(new Coordinate(1,1), MapTileType.Empty),
+                new MapTile(new Coordinate(2,1), MapTileType.Empty),
+                new MapTile(new Coordinate(3,1), MapTileType.Empty),
+                new MapTile(new Coordinate(4,1), MapTileType.Empty),
+                new MapTile(new Coordinate(5,1), MapTileType.Empty),
+                new MapTile(new Coordinate(6,1), MapTileType.Empty),
 
-                new MapCoordinate(new Coordinate(0,2), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(1,2), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(2,2), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(3,2), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(4,2), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(5,2), MapCoordinateType.Empty),
-                new MapCoordinate(new Coordinate(6,2), MapCoordinateType.Tree),//should find
+                new MapTile(new Coordinate(0,2), MapTileType.Empty),
+                new MapTile(new Coordinate(1,2), MapTileType.Empty),
+                new MapTile(new Coordinate(2,2), MapTileType.Empty),
+                new MapTile(new Coordinate(3,2), MapTileType.Empty),
+                new MapTile(new Coordinate(4,2), MapTileType.Empty),
+                new MapTile(new Coordinate(5,2), MapTileType.Empty),
+                new MapTile(new Coordinate(6,2), MapTileType.Tree),//should find
 
             };
             var map = new Map(mapCoordinates);
-            var traveler = new Traveler(0, 0);
-            var tobogganTrajectory = new TobogganTrajectory(map, traveler);
+            var tobogganTrajectory = new TobogganTrajectory(map);
 
             var numberOfTrees = tobogganTrajectory.GetNumberOfTreesInPath();
 
             Assert.Equal(1, numberOfTrees);
+        }
+
+        [Fact]
+        public void Find_Trees_Path_From_Input()
+        {
+            var input = new List<String>()
+            {
+                "..##.......",
+                "#...#...#..",
+                ".#....#..#.",
+                "..#.#...#.#",
+                ".#...##..#.",
+                "..#.##.....",
+                ".#.#.#....#",
+                ".#........#",
+                "#.##...#...",
+                "#...##....#",
+                ".#..#...#.#"
+            };
+            var tobogganTrajectory = TobogganTrajectory.StartPuzzle(input);
+            var numberOfTrees = tobogganTrajectory.GetNumberOfTreesInPath();
+
+            Assert.Equal(7, numberOfTrees);
+        }
+
+        [Fact]
+        public void Find_Trees_In_Multiple_Paths_From_Input()
+        {
+            var input = new List<String>()
+            {
+                "..##.......",
+                "#...#...#..",
+                ".#....#..#.",
+                "..#.#...#.#",
+                ".#...##..#.",
+                "..#.##.....",
+                ".#.#.#....#",
+                ".#........#",
+                "#.##...#...",
+                "#...##....#",
+                ".#..#...#.#"
+            };
+            var tobogganTrajectory = TobogganTrajectory.StartPuzzle(input);
+            var answer = tobogganTrajectory.GetNumberOfTreesInMultiplePaths();
+
+            Assert.Equal(336, answer);
         }
     }
 }

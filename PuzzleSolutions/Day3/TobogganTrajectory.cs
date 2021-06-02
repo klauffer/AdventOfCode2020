@@ -1,43 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PuzzleSolutions.Day3
 {
-    class TobogganTrajectory
+    public sealed class TobogganTrajectory
     {
         private readonly Map _map;
-        private readonly Traveler _traveler;
 
-        public TobogganTrajectory(Map map, Traveler traveler)
+        public static TobogganTrajectory StartPuzzle(IEnumerable<string> input)
         {
-            _map = map;
-            _traveler = traveler;
+            var map = InputAdapter.BuildMap(input);
+            return new TobogganTrajectory(map);
         }
 
-        //public static TobogganTrajectory StartQuestion1Journey()
-        //{
-        //    var map = new Map()
-        //}
+        internal TobogganTrajectory(Map map)
+        {
+            _map = map;
+        }
 
         public int GetNumberOfTreesInPath()
         {
-            var result = 0;
-            var mapCoordinateType = MapCoordinateType.Empty;
+            var numberOfTreesInPath = 0;
+            var mapCoordinateType = MapTileType.Empty;
             var newCoordinate = new Coordinate(0, 0);
+            var traveler = new Traveler(0, 0);
             do
             {
-                newCoordinate = _traveler.Move(3,1);
+                newCoordinate = traveler.Move(3,1);
                 mapCoordinateType = _map.GetCoordinateType(newCoordinate);
-                if (mapCoordinateType == MapCoordinateType.Tree)
+                if (mapCoordinateType == MapTileType.Tree)
                 {
-                    result++;
+                    numberOfTreesInPath++;
                 }
-            } while (mapCoordinateType != MapCoordinateType.OutOfBoundsY);
+            } while (mapCoordinateType != MapTileType.OutOfBoundsY);
 
-            return result;
+            return numberOfTreesInPath;
         }
+
+        public double GetNumberOfTreesInMultiplePaths()
+        {
+            var pathPatterns = new List<Coordinate>()
+            {
+                new Coordinate(1,1),
+                new Coordinate(3,1),
+                new Coordinate(5,1),
+                new Coordinate(7,1),
+                new Coordinate(1,2),
+            };
+            var numberOfTreesInEachPath = new List<double>();
+            foreach (var pathPattern in pathPatterns)
+            {
+                var numberOfTreesInPath = 0;
+                var mapCoordinateType = MapTileType.Empty;
+                var newCoordinate = new Coordinate(0, 0);
+                var traveler = new Traveler(0, 0);
+                do
+                {
+                    newCoordinate = traveler.Move(pathPattern.X, pathPattern.Y);
+                    mapCoordinateType = _map.GetCoordinateType(newCoordinate);
+                    if (mapCoordinateType == MapTileType.Tree)
+                    {
+                        numberOfTreesInPath++;
+                    }
+                } while (mapCoordinateType != MapTileType.OutOfBoundsY);
+                numberOfTreesInEachPath.Add(numberOfTreesInPath);
+            }
+            double answer = numberOfTreesInEachPath.Aggregate((a, x) => a * x);
+            return answer;
+        }
+
     }
 }

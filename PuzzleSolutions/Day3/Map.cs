@@ -5,32 +5,34 @@ namespace PuzzleSolutions.Day3
 {
     internal class Map
     {
-        private HashSet<MapCoordinate> _coordinates;
+        private HashSet<MapTile> _tiles;
 
-        public Map(HashSet<MapCoordinate> mapCoordinateType)
+        public Map(HashSet<MapTile> mapTile)
         {
-            _coordinates = mapCoordinateType;
+            _tiles = mapTile;
         }
 
-        internal MapCoordinateType GetCoordinateType(int x, int y)
+        internal MapTileType GetCoordinateType(int x, int y)
         {
             var isInXBounds = x <= GetMaxXCoordinate();
             var isInYBounds = y <= GetMaxYCoordinate();
+
+
             return (isInXBounds, isInYBounds) switch
             {
-                (true, true) => _coordinates.Single(mapCoordinate => mapCoordinate.Coordinate.X == x &&
-                                                                  mapCoordinate.Coordinate.Y == y)
-                                            .MapCoordinateType,
-                (false, true) => MapCoordinateType.OutOfBoundsX,
-                (true, false) => MapCoordinateType.OutOfBoundsY,
-                (false, false) => MapCoordinateType.OutOfBoundsY,
+                (true, true) => GetMapTile(x, y).MapTileType,
+                (false, true) => GetMapTile(x % (GetMaxXCoordinate()+1), y).MapTileType,
+                (true, false) => MapTileType.OutOfBoundsY,
+                (false, false) => MapTileType.OutOfBoundsY,
             };
         }
 
-        internal MapCoordinateType GetCoordinateType(Coordinate coordinate) => 
+        internal MapTileType GetCoordinateType(Coordinate coordinate) => 
             GetCoordinateType(coordinate.X, coordinate.Y);
 
-        private int GetMaxXCoordinate() => _coordinates.Select(mapCoordinate => mapCoordinate.Coordinate.X).Max();
-        private int GetMaxYCoordinate() => _coordinates.Select(mapCoordinate => mapCoordinate.Coordinate.Y).Max();
+        private int GetMaxXCoordinate() => _tiles.Select(mapCoordinate => mapCoordinate.Coordinate.X).Max();
+        private int GetMaxYCoordinate() => _tiles.Select(mapCoordinate => mapCoordinate.Coordinate.Y).Max();
+        private MapTile GetMapTile(int x, int y) =>
+            _tiles.Single(mapCoordinate => mapCoordinate.Coordinate.X == x && mapCoordinate.Coordinate.Y == y);
     }
 }
